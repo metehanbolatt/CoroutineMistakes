@@ -3,11 +3,16 @@ package com.metehanbolat.coroutinemistakes
 import kotlinx.coroutines.*
 
 suspend fun getUserFirstNames(userIds: List<String>): List<String> {
-    val firstNames = mutableListOf<String>()
-    for(id in userIds) {
-        firstNames.add(getFirstName(id))
+    val firstNames = mutableListOf<Deferred<String>>()
+    coroutineScope {
+        for(id in userIds) {
+            val firstName = async {
+                getFirstName(id)
+            }
+            firstNames.add(firstName)
+        }
     }
-    return firstNames
+    return firstNames.awaitAll()
 }
 
 suspend fun  getFirstName(userId: String): String {
