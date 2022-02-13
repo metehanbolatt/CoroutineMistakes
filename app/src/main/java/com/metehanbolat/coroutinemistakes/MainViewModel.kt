@@ -1,4 +1,12 @@
 package com.metehanbolat.coroutinemistakes
 
-class MainViewModel {
+import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.delay
+
+class MainViewModel: ViewModel() {
+
+    suspend fun postValueToApi() {
+        delay(10000L)
+    }
+
 }
