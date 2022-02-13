@@ -20,9 +20,7 @@ class MainActivity : AppCompatActivity() {
         val button = findViewById<Button>(androidx.core.R.id.dialog_button)
 
         button.setOnClickListener {
-            lifecycleScope.launch {
-                viewModel.postValueToApi()
-            }
+            viewModel.postValueToApi()
         }
     }
 }
